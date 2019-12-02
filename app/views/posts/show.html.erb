@@ -25,5 +25,8 @@
 <% @post.comments.each do |comment| %>
   <div>
     <%= comment.body %> - <%= comment.name %>
+    <% if @post.author_id == current_author.id %>
+      <%= link_to 'delete', post_comment_path(@post, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
   </div>
 <% end %>
