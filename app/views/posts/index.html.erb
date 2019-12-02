@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Posts</h1>
 
 <table>
@@ -8,7 +6,9 @@
       <th>Author</th>
       <th>Title</th>
       <th>Body</th>
-      <th colspan="3"></th>
+      <% if current_author %>
+        <th colspan="2"></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -16,11 +16,12 @@
     <% @posts.each do |post| %>
       <tr>
         <td><%= post.author.name %></td>
-        <td><%= post.title %></td>
+        <td><%= link_to post.title, post %></td>
         <td><%= post.body %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_author && current_author.id == post.author_id %>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

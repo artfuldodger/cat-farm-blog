@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_author!, except: [:show, :index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_author, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.newest_first
@@ -53,6 +54,12 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def ensure_author
+    return if @post.author == current_author
+
+    redirect_back(fallback_location: root_url, notice: 'You can only mess with your own posts.')
   end
 
   def post_params
