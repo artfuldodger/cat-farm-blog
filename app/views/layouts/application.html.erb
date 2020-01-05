@@ -15,5 +15,12 @@
     <p id="alert"><%= alert %></p>
 
     <%= yield %>
+
+    <div id="footer">
+      <%= form_with(model: NewsletterSubscription.new) do |f| %>
+        <%= f.text_field :email, placeholder: 'E-mail' %>
+        <%= f.submit 'Subscribe to newsletter' %>
+      <% end %>
+    </div>
   </body>
 </html>
