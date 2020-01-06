@@ -1,26 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>CatFarm</title>
+    <title>Cat Farm: Let's learn all about Ruby and Rails</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <p id="notice"><%= notice %></p>
-    <p id="alert"><%= alert %></p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Cat Farm</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
 
-    <%= yield %>
-
-    <div id="footer">
-      <%= form_with(model: NewsletterSubscription.new) do |f| %>
-        <%= f.text_field :email, placeholder: 'E-mail' %>
-        <%= f.submit 'Subscribe to newsletter' %>
+    <div class="container">
+      <% if notice %>
+        <p class="alert alert-primary"><%= notice %></p>
       <% end %>
+
+      <% if alert %>
+        <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+
+      <%= yield %>
+
+      <div id="footer">
+        <%= form_with(model: NewsletterSubscription.new) do |f| %>
+          <%= f.text_field :email, placeholder: 'E-mail' %>
+          <%= f.submit 'Subscribe to newsletter' %>
+        <% end %>
+      </div>
     </div>
   </body>
 </html>
